@@ -1,0 +1,58 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+vehicle all
+{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+  {% if request.user.role == 'superadmin' %}
+  <a href="{%url 'create-vehicle'%}" class="btn btn-success m-5">Add Vehicle</a>
+
+
+
+  {% endif %}
+    <div class="row  ">
+     {%for vehicle in vehicles%}
+     <div class="col-3 mt-4 ">
+        <div class="card border shadow" style="width:100%;">
+            {% if vehicle.image.first.image %}
+            <img style="height: 30vh;" src="{{vehicle.image.first.image.url}}" class="card-img-top" alt="...">
+
+            {% else %}
+            <img style="height: 30vh;" src="{% static 'images/default.jpg' %}" class="card-img-top" alt="no image">
+
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{vehicle.vehicle_number}}</h5>
+              <a href="{%url 'vehicle-detail' vehicle.id %}" class="btn btn-primary">view</a>
+              {% if request.user.role == 'superadmin' %}
+              <a href="{%url 'update-vehicle' vehicle.id %}" class="btn btn-warning">update</a>
+
+             {% elif request.user.role == 'admin'%}
+             <a href="{%url 'update-vehicle' vehicle.id %}" class="btn btn-warning">update</a>
+
+              {% endif %}
+              {% if request.user.role == 'superadmin' %}
+              <a href="{%url 'veh-delete' vehicle.id %}" class="btn btn-danger">delete</a>
+
+            
+
+              {% endif %}
+
+
+            </div>
+          </div>
+       </div>
+
+     {%endfor%}
+
+    </div>
+
+</div>
+
+
+
+{% endblock content %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+vehicle detail
+{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row ">
+    <div class="col-6">
+      <div id="carouselExampleAutoplaying" class="carousel slide mt-5" data-bs-ride="carousel">
+        <div class="carousel-inner">
+       
+          {% for img in vehicle.image.all %}
+
+          <div class="carousel-item active">
+            {% if img.image %}
+            <img style="height: 60vh;" src="{{img.image.url}}" class="d-block w-100" alt=".no img..">
+
+            {% endif %}
+
+          </div>
+
+          {% endfor %}
+        
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="mt-5 ms-3">
+        <h2>Number : <span>{{vehicle.vehicle_number}}</span> </h2>
+      <h3>Type :  <span>{{vehicle.vehicle_type}}</span></h3>
+      <h4>Description :{{vehicle.vehicle_description}}</h4>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
